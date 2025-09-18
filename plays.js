@@ -28,7 +28,7 @@ const plays = {
     fire: {
         name: "Fire",
         image: "https://cdn-icons-png.flaticon.com/512/2311/2311301.png",
-        counters: ["paper", "scissors", "chest", "magnet"]
+        counters: ["paper", "scissors", "chest", "magnet", "acid", "tree"]
     },
     chest: {
         name: "Chest",
@@ -38,7 +38,7 @@ const plays = {
     acid: {
         name: "Acid",
         image: "https://cdn-icons-png.flaticon.com/512/5671/5671353.png",
-        counters: ["paper", "gun", "scissors", "rock", "chest"]
+        counters: ["paper", "gun", "scissors", "rock", "chest", "magnet", "tree"]
     },
     glass: {
         name: "Glass",
@@ -49,5 +49,11 @@ const plays = {
         name: "Magnet",
         image: "https://cdn-icons-png.flaticon.com/512/3989/3989630.png",
         counters: ["gun", "scissors"]
-    }
+    },
+    tree: {
+        name: "Tree",
+        image: "https://cdn-icons-png.flaticon.com/512/2220/2220083.png",
+        counters: ["paper", "scissors", "chest", "magnet", "glass", "rock", "gun"]
+    },
+    
 };
