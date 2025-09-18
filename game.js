@@ -86,6 +86,13 @@ function showResult() {
     }
 }
 
+function getCustomMessage(winner, loser) {
+    const matchingCase = cases.find(caseItem => 
+        caseItem.win === winner && caseItem.loss === loser
+    );
+    return matchingCase ? matchingCase.message : null;
+}
+
 function determineWinner() {
     const playerCounters = plays[playerChoice].counters;
     const computerCounters = plays[computerChoice].counters;
@@ -122,5 +129,3 @@ function resetGame() {
 
 // Initialize the game when the page loads
 document.addEventListener('DOMContentLoaded', initGame);
-
-
