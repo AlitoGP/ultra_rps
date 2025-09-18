@@ -50,7 +50,7 @@ function showBattle() {
     };
     document.getElementById('computerName').textContent = plays[computerChoice].name;
     
-    setTimeout(showResult, 3000);
+    setTimeout(showResult, 1000);
 }
 
 function showResult() {
@@ -122,3 +122,4 @@ function resetGame() {
 
 // Initialize the game when the page loads
 document.addEventListener('DOMContentLoaded', initGame);
+
