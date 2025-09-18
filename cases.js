@@ -24,6 +24,9 @@ const cases = [
     { win: "fire", loss: "paper", message: "Fire burns Paper" },
     { win: "fire", loss: "scissors", message: "Fire melts Scissors" },
     { win: "fire", loss: "chest", message: "Fire burns Chest" },
+    { win: "fire", loss: "magnet", message: "Fire debilitates Magnet" },
+    { win: "fire", loss: "acid", message: "Fire evaporates Acid" },
+    { win: "fire", loss: "tree", message: "Fire burns Tree" },
     
     // Chest wins
     { win: "chest", loss: "rock", message: "Chest contains Rock" },
