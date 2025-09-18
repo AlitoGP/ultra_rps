@@ -50,7 +50,7 @@ function showBattle() {
     };
     document.getElementById('computerName').textContent = plays[computerChoice].name;
     
-    setTimeout(showResult, 1000);
+    setTimeout(showResult, 3000);
 }
 
 function showResult() {
@@ -75,11 +75,13 @@ function showResult() {
         modalContent.classList.add('draw');
     } else if (result === 'player') {
         resultTitle.textContent = 'You Win!';
-        resultMessage.textContent = `${plays[playerChoice].name} beats ${plays[computerChoice].name}!`;
+        const customMessage = getCustomMessage(playerChoice, computerChoice);
+        resultMessage.textContent = customMessage || `${plays[playerChoice].name} beats ${plays[computerChoice].name}!`;
         modalContent.classList.add('win');
     } else {
         resultTitle.textContent = 'Computer Wins!';
-        resultMessage.textContent = `${plays[computerChoice].name} beats ${plays[playerChoice].name}!`;
+        const customMessage = getCustomMessage(computerChoice, playerChoice);
+        resultMessage.textContent = customMessage || `${plays[computerChoice].name} beats ${plays[playerChoice].name}!`;
         modalContent.classList.add('lose');
     }
 }
