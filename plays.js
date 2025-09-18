@@ -8,7 +8,7 @@ const plays = {
     rock: {
         name: "Rock",
         image: "https://cdn-icons-png.flaticon.com/512/835/835024.png",
-        counters: ["scissors", "fire"]
+        counters: ["scissors", "fire", "tree"]
     },
     scissors: {
         name: "Scissors",
@@ -53,7 +53,8 @@ const plays = {
     tree: {
         name: "Tree",
         image: "https://cdn-icons-png.flaticon.com/512/2220/2220083.png",
-        counters: ["paper", "scissors", "chest", "magnet", "glass", "rock", "gun"]
+        counters: ["paper", "scissors", "chest", "magnet", "glass", "gun"]
     },
     
 };
+
