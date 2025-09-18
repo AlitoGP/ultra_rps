@@ -41,5 +41,17 @@ const cases = [
     // Glass wins
     { win: "glass", loss: "paper", message: "Glass cuts Paper" },
     { win: "glass", loss: "acid", message: "Glass contains Acid" },
-    { win: "glass", loss: "fire", message: "Glass extinguishes Fire" }
+    { win: "glass", loss: "fire", message: "Glass extinguishes Fire" },
+
+    // Tree wins
+    { win: "tree", loss: "paper", message: "Tree makes Paper" },
+    { win: "tree", loss: "glass", message: "Tree breaks Glass" },
+    { win: "tree", loss: "scissors", message: "Tree breaks Scissors" },
+    { win: "tree", loss: "magnet", message: "Tree is not affected by Magnet" },
+    { win: "tree", loss: "magnet", message: "Tree handles the bullets of Gun" },
+    { win: "tree", loss: "magnet", message: "Tree makes Chest" },
+
+    // Magnet wins
+    { win: "magnet", loss: "gun", message: "Magnet attracts Gun" },
+    { win: "magnet", loss: "scissors", message: "Magnet attracts Scissors" },
 ];
