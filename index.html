@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ultra RPS</title>
+    <title>Desultory Memory</title>
     <style>
         * {
             margin: 0;
@@ -29,8 +29,8 @@
             border-radius: 20px;
             padding: 30px;
             box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
-            max-width: 800px;
-            width: 90%;
+            max-width: 1000px;
+            width: 95%;
         }
 
         h1 {
@@ -41,13 +41,62 @@
             color: #ffffff;
         }
 
+        .game-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .timer {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #ffffff;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 15px 25px;
+            border-radius: 15px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .current-target {
+            text-align: center;
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 15px;
+            padding: 20px;
+            min-width: 200px;
+        }
+
+        .target-icon {
+            width: 80px;
+            height: 80px;
+            object-fit: cover;
+            border-radius: 10px;
+            margin-bottom: 10px;
+            filter: grayscale(100%) brightness(0.9);
+        }
+
+        .target-name {
+            font-size: 1.3rem;
+            font-weight: bold;
+            color: #ffffff;
+            margin-bottom: 5px;
+        }
+
+        .target-recipe {
+            font-size: 0.9rem;
+            color: #cccccc;
+        }
+
         .inventory {
             background: rgba(255, 255, 255, 0.08);
             border: 1px solid rgba(255, 255, 255, 0.1);
             border-radius: 15px;
             padding: 20px;
-            margin-bottom: 30px;
-            max-height: 200px;
+            margin-bottom: 20px;
+            max-height: 250px;
             overflow-y: auto;
         }
 
@@ -57,13 +106,13 @@
             color: #cccccc;
         }
 
-        .plays-grid {
+        .objects-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
             gap: 15px;
         }
 
-        .play-item {
+        .object-item {
             background: rgba(255, 255, 255, 0.1);
             border: 2px solid rgba(255, 255, 255, 0.2);
             border-radius: 10px;
@@ -71,69 +120,107 @@
             text-align: center;
             cursor: pointer;
             transition: all 0.3s ease;
+            position: relative;
         }
 
-        .play-item:hover {
-            border-color: #ffffff;
+        .object-item:hover {
             background: rgba(255, 255, 255, 0.15);
             transform: translateY(-2px);
         }
 
-        .play-item img {
-            width: 60px;
-            height: 60px;
+        .object-item.correct {
+            border-color: #4CAF50;
+            background: rgba(76, 175, 80, 0.2);
+        }
+
+        .object-item.incorrect {
+            border-color: #F44336;
+            background: rgba(244, 67, 54, 0.2);
+        }
+
+        .object-item img {
+            width: 50px;
+            height: 50px;
             object-fit: cover;
             border-radius: 8px;
             margin-bottom: 8px;
+            filter: grayscale(100%) brightness(0.9);
         }
 
-        .play-item span {
+        .object-item span {
             display: block;
-            font-size: 0.9rem;
+            font-size: 0.8rem;
             font-weight: bold;
             color: #e0e0e0;
         }
 
-        .battle-area {
+        .click-count {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background: #ffffff;
+            color: #333;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            font-size: 0.7rem;
+            font-weight: bold;
             display: none;
-            text-align: center;
-            padding: 20px;
-        }
-
-        .battle-players {
-            display: flex;
-            justify-content: space-around;
             align-items: center;
-            margin: 30px 0;
+            justify-content: center;
         }
 
-        .player-choice, .computer-choice {
-            text-align: center;
+        .object-item.clicked .click-count {
+            display: flex;
         }
 
-        .choice-icon {
-            width: 100px;
-            height: 100px;
-            object-fit: cover;
-            border-radius: 10px;
-            border: 3px solid #ffffff;
+        .history {
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 20px;
+            max-height: 200px;
+            overflow-y: auto;
+        }
+
+        .history h2 {
+            margin-bottom: 15px;
+            color: #cccccc;
+        }
+
+        .history-item {
+            display: flex;
+            align-items: center;
+            padding: 10px;
             margin-bottom: 10px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 8px;
         }
 
-        .choice-name {
-            font-size: 1.2rem;
+        .history-icon {
+            width: 40px;
+            height: 40px;
+            object-fit: cover;
+            border-radius: 6px;
+            margin-right: 15px;
+            filter: grayscale(100%) brightness(0.9);
+        }
+
+        .history-info {
+            flex-grow: 1;
+        }
+
+        .history-name {
             font-weight: bold;
             color: #ffffff;
         }
 
-        .vs-text {
-            font-size: 2rem;
-            font-weight: bold;
-            color: #cccccc;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        .history-time {
+            font-size: 0.9rem;
+            color: #aaaaaa;
         }
 
-        .game-over-modal {
+        .game-complete {
             position: fixed;
             top: 0;
             left: 0;
@@ -146,7 +233,7 @@
             z-index: 1000;
         }
 
-        .modal-content {
+        .complete-content {
             background: linear-gradient(135deg, #4a4a4a, #2a2a2a);
             border: 1px solid rgba(255, 255, 255, 0.2);
             padding: 40px;
@@ -158,24 +245,24 @@
             transition: all 0.3s ease;
         }
 
-        .modal-content.show {
+        .complete-content.show {
             transform: scale(1);
             opacity: 1;
         }
 
-        .modal-content h2 {
+        .complete-content h2 {
             font-size: 2.5rem;
             margin-bottom: 20px;
             color: #ffffff;
         }
 
-        .modal-content p {
+        .complete-content p {
             font-size: 1.3rem;
             margin-bottom: 30px;
             color: #cccccc;
         }
 
-        .play-again-btn {
+        .restart-btn {
             background: #ffffff;
             color: #333333;
             border: 2px solid #ffffff;
@@ -187,22 +274,10 @@
             transition: all 0.3s ease;
         }
 
-        .play-again-btn:hover {
+        .restart-btn:hover {
             background: #cccccc;
             border-color: #cccccc;
             transform: translateY(-2px);
-        }
-
-        .modal-content.win {
-            background: linear-gradient(135deg, #6a6a6a, #4a4a4a);
-        }
-
-        .modal-content.lose {
-            background: linear-gradient(135deg, #3a3a3a, #1a1a1a);
-        }
-
-        .modal-content.draw {
-            background: linear-gradient(135deg, #5a5a5a, #3a3a3a);
         }
 
         .scrollbar {
@@ -226,42 +301,37 @@
 </head>
 <body>
     <div class="game-container">
-        <h1>Ultra RPS</h1>
+        <h1>Desultory Memory</h1>
         
-        <div class="inventory scrollbar">
-            <h2>Choose Your Play</h2>
-            <div class="plays-grid" id="playsGrid"></div>
-        </div>
-
-        <div class="battle-area" id="battleArea">
-            <h2>Battle!</h2>
-            <div class="battle-players">
-                <div class="player-choice">
-                    <img id="playerIcon" class="choice-icon" src="" alt="">
-                    <div id="playerName" class="choice-name"></div>
-                    <div>You</div>
-                </div>
-                <div class="vs-text">VS</div>
-                <div class="computer-choice">
-                    <img id="computerIcon" class="choice-icon" src="" alt="">
-                    <div id="computerName" class="choice-name"></div>
-                    <div>Computer</div>
-                </div>
+        <div class="game-header">
+            <div class="timer" id="timer">0.00s</div>
+            <div class="current-target" id="currentTarget">
+                <img id="targetIcon" class="target-icon" src="" alt="">
+                <div id="targetName" class="target-name"></div>
+                <div id="targetRecipe" class="target-recipe"></div>
             </div>
         </div>
-    </div>
 
-    <div class="game-over-modal" id="gameOverModal">
-        <div class="modal-content" id="modalContent">
-            <h2 id="resultTitle"></h2>
-            <p id="resultMessage"></p>
-            <button class="play-again-btn" onclick="resetGame()">Play Again</button>
+        <div class="inventory scrollbar">
+            <h2>Select Objects</h2>
+            <div class="objects-grid" id="objectsGrid"></div>
+        </div>
+
+        <div class="history scrollbar">
+            <h2>Completion History</h2>
+            <div id="historyList"></div>
         </div>
     </div>
 
-    <script src="plays.js"></script>
-    <script src="cases.js"></script>
+    <div class="game-complete" id="gameComplete">
+        <div class="complete-content" id="completeContent">
+            <h2>Memory Complete!</h2>
+            <p id="finalTime">You completed all objects in X.XX seconds!</p>
+            <button class="restart-btn" onclick="restartGame()">Play Again</button>
+        </div>
+    </div>
+
+    <script src="objects.js"></script>
     <script src="game.js"></script>
 </body>
 </html>
-
